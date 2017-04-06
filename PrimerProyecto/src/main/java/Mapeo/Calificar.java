@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,30 +16,32 @@ import javax.persistence.Table;
 @Table(name = "calificar")
 public class Calificar implements Serializable {
     @Id
-    @Column(name = "Correo_fk")
-    private String correo;
+    @ManyToOne
+    @JoinColumn(name = "Correo")
+    private Persona persona;
     
     @Id
-    @Column(name = "idNombre_fk")
-    private String idNombre;
+    @ManyToOne
+    @JoinColumn(name = "idNombre")
+    private Puesto puesto;
     
     @Column(name = "Comentario")
     private String comentario;
 
-    public String getCorreo() {
-        return correo;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
-    public String getIdNombre() {
-        return idNombre;
+    public Puesto getPuesto() {
+        return puesto;
     }
 
-    public void setIdNombre(String idNombre) {
-        this.idNombre = idNombre;
+    public void setPuesto(Puesto puesto) {
+        this.puesto = puesto;
     }
 
     public String getComentario() {
@@ -47,6 +51,4 @@ public class Calificar implements Serializable {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-    
-    
 }

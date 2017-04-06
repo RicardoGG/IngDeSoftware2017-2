@@ -1,9 +1,10 @@
 package Mapeo;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,26 +15,31 @@ import javax.persistence.Table;
 @Table(name = "vender")
 public class Vender implements Serializable {
     @Id
-    @Column(name = "idAlimento_fk")
-    private int idAlimento;
+    @ManyToOne
+    @JoinColumn(name = "idAlimento")
+    private Alimentos alimentos;
     
     @Id
-    @Column(name = "idNombre_fk")
-    private String idNombre;
+    @ManyToOne
+    @JoinColumn(name = "idNombre")
+    private Puesto puesto;
 
-    public int getIdAlimento() {
-        return idAlimento;
+    
+    public Alimentos getAlimentos() {
+        return alimentos;
     }
 
-    public void setIdAlimento(int idAlimento) {
-        this.idAlimento = idAlimento;
+    public void setAlimentos(Alimentos alimentos) {
+        this.alimentos = alimentos;
     }
 
-    public String getIdNombre() {
-        return idNombre;
+    public Puesto getPuesto() {
+        return puesto;
     }
 
-    public void setIdNombre(String idNombre) {
-        this.idNombre = idNombre;
+    public void setPuesto(Puesto puesto) {
+        this.puesto = puesto;
     }
+    
+    
 }

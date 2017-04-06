@@ -1,9 +1,14 @@
 package Mapeo;
 
+
+
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,18 +19,19 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class Usuario implements Serializable {
     @Id
-    @Column(name = "Correo_us")
-    private String correo;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Correo")
+    private Persona persona;
     
     @Column(name = "administrador")
     private String administrador;
 
-    public String getCorreo() {
-        return correo;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     public String getAdministrador() {
@@ -35,6 +41,4 @@ public class Usuario implements Serializable {
     public void setAdministrador(String administrador) {
         this.administrador = administrador;
     }
-    
-    
 }

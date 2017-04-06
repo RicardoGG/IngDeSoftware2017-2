@@ -29,7 +29,17 @@ public class Persona implements Serializable {
     
     @Column(name = "contrasena")
     private String contrasenia;
-
+    
+    /* Constructor de la clase Persona */
+    public Persona(String nombre, String apPaterno, String apMaterno, String correo, String contrasenia){
+        this.nombre = nombre;
+        this.apPaterno = apPaterno;
+        this.apMaterno = apMaterno;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
+    }
+    
+    /* Getters and Setters */
     public String getCorreo() {
         return correo;
     }
@@ -69,6 +79,4 @@ public class Persona implements Serializable {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
-    
 }

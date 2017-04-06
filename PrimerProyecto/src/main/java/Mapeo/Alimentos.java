@@ -17,9 +17,6 @@ public class Alimentos implements Serializable {
     @Column(name = "idAlimento")
     private int idAlimento;
     
-    @Column(name = "idNombre_fk")
-    private String idNombre;
-    
     @Column(name = "nombreAlim")
     private String nombreAlim;
 
@@ -29,14 +26,6 @@ public class Alimentos implements Serializable {
 
     public void setIdAlimento(int idAlimento) {
         this.idAlimento = idAlimento;
-    }
-
-    public String getIdNombre() {
-        return idNombre;
-    }
-
-    public void setIdNombre(String idNombre) {
-        this.idNombre = idNombre;
     }
 
     public String getNombreAlim() {
