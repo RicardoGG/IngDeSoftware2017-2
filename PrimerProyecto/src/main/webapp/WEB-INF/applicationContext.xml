@@ -23,7 +23,12 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
-                <!-- Aqui van los MAPEOS <value>Mapeo.Clase</value> -->
+                <value>Mapeo.Alimentos</value>
+                <value>Mapeo.Calificar</value>
+                <value>Mapeo.Persona</value>
+                <value>Mapeo.Puesto</value>
+                <value>Mapeo.Usuario</value>
+                <value>Mapeo.Vender</value>
             </list>
         </property>   
         <property name="hibernateProperties">
@@ -37,10 +42,22 @@
     
     <!--  Se agrega para poder inyectarlo a los Controladores, revisa Controlador.java
           en el paquete controlador, se esta haciendo uso de @Autowiring-->
+          
+    <bean id="AlimentosDAO" class="Modelo.AlimentosDAO"
+        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"/>
+          
+    <bean id="CalificarDAO" class="Modelo.CalificarDAO"
+        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"/>
     
-    <!-- AQUI VAN LOS MODELOS -->
+    <bean id="PersonaDAO" class="Modelo.PersonaDAO"
+        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"/>
     
-    <!--<bean id="PersonaDAO" class="Modelo.PersonaDAO"
-        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"
-    />-->
+    <bean id="PuestoDAO" class="Modelo.PuestoDAO"
+        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"/>
+    
+    <bean id="UsuarioDAO" class="Modelo.UsuarioDAO"
+        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"/>
+    
+    <bean id="VenderDAO" class="Modelo.VenderDAO"
+        p:sessionFactory-ref="hibernate4AnnotatedSessionFactory"/>
 </beans>
