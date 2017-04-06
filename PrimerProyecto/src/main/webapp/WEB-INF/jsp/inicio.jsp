@@ -18,10 +18,10 @@
             <input id="nombre2" name ="passwd" type="text" placeholder="Contrasena"><br>
             <button>Aceptar</button>
         </form>
-        <form method="submit" action="/Practica1-ManuelChavez/login">
+        <form method="submit" action="/PrimerProyecto/registrarse">
             <button>Registrarse</button>
         </form>
-        <form method="Post" action="\PrimerProyecto\login">
+        <form method="Post" action="\PrimerProyecto\verInformacionPuesto">
             <h1>Iniciar como Visitante</h1>
             <button>Aceptar</button>
         </form>
