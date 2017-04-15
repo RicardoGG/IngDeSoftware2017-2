@@ -5,6 +5,8 @@ import Mapeo.Persona;
 import Mapeo.Usuario;
 import Modelo.PersonaDAO;
 import Modelo.UsuarioDAO;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ public class Controlador {
     
     @Autowired
     PersonaDAO persona;
+    
+    private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@ciencias.unam.mx";
     
     @RequestMapping(value="/")
     public String inicio(){
@@ -83,15 +87,32 @@ public class Controlador {
     
     @RequestMapping(value="/formulario", method = RequestMethod.POST)
     public ModelAndView registro(ModelMap model,HttpServletRequest request){
+        Persona p = null;
+        Usuario u = null;
+        
         String nombre = request.getParameter("nombre");
         String apPaterno = request.getParameter("paterno");
         String apMaterno = request.getParameter("materno");
         String correo = request.getParameter("email");
         String pass = request.getParameter("password");
-        //Falta terminar
+        
+        if(valida_email(correo) == false)
+            return new ModelAndView("error",model);
+        else{
+            p = new Persona(nombre, apPaterno, apMaterno, correo, pass);
+            u = new Usuario(correo, "0");
+            persona.insert(p);
+            usuario.insert(u);
+        }
+        //Faltan detalles.
         return new ModelAndView("inicio",model);
     }
     
-    
+    private static boolean valida_email(String correo){
+        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+
+        Matcher matcher = pattern.matcher(correo);
+        return matcher.matches();
+    }
     
 }
