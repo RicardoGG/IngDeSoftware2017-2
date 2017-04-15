@@ -12,10 +12,12 @@
         <title>Perfil Usuario</title>
     </head>
     <body>
-        <h1></h1>
-        <form action="." oninput="range_control_value.value = range_control.valueAsNumber">
-            <h2> <br> ${nombre}<br>
-                ${email}<br>
+        <h1>Bienvenido</h1>
+            <h2> 
+                <br> ${nombre}
+                <br> ${apellidoPat}
+                <br> ${apellidoMat}
+                <br> ${correo}
                 </form>
             </h2>
     </body>

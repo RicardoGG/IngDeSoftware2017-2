@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,19 +20,18 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class Usuario implements Serializable {
     @Id
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Correo")
-    private Persona persona;
+    @Column(name="Correo_us")
+    private String correo_us;
     
     @Column(name = "administrador")
     private String administrador;
 
-    public Persona getPersona() {
-        return persona;
+    public String getCorreo_us() {
+        return correo_us;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setCorreo_us(String correo_us) {
+        this.correo_us = correo_us;
     }
 
     public String getAdministrador() {
@@ -41,4 +41,7 @@ public class Usuario implements Serializable {
     public void setAdministrador(String administrador) {
         this.administrador = administrador;
     }
+
+    
+
 }

@@ -18,7 +18,7 @@
                 ${horario}<br>
                 ${alimentos}<br>
                 ${ubicacion}<br>
-                </form<
             </h2>
+        </form>
     </body>
 </html>

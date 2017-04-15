@@ -12,7 +12,7 @@
         <title>Error</title>
     </head>
     <body>
-        <h1>Parece que algo esta mal</h1>
-        <p>Porfavor completa los campos que esten vacios</p>
+        <h1>Error</h1>
+        <br>${mensaje}
     </body>
 </html>

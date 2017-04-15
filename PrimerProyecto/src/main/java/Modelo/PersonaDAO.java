@@ -1,6 +1,7 @@
 package Modelo;
 
 import Mapeo.Persona;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -82,4 +83,29 @@ public class PersonaDAO {
         }
         finally { session.close(); }
     }
+    
+    
+    public Persona getPersona(String correo, String con) {
+        Persona per = null;
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = " FROM Persona WHERE correo = :correoParam";
+            Query query = session.createQuery(hql);
+            query.setParameter("correoParam", correo);
+            per = (Persona)query.uniqueResult();
+            tx.commit();
+        }
+        catch (Exception e) {
+           if (tx!=null){ 
+               tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+           session.close();
+        }
+        return per;
+    }
+    
 }

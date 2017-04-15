@@ -1,6 +1,7 @@
 package Modelo;
 
 import Mapeo.Usuario;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -82,4 +83,29 @@ public class UsuarioDAO {
         }
         finally { session.close(); }
     }
+    
+    
+    public Usuario getUser(String correo, String pas) {
+        Usuario user = null;
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "FROM Usuario WHERE correo_us = :correoPam";
+            Query query = session.createQuery(hql);
+            query.setParameter("correoPam", correo);
+            user = (Usuario)query.uniqueResult();
+            tx.commit();
+        }
+        catch (Exception e) {
+           if (tx!=null){ 
+               tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+           session.close();
+        }
+        return user;
+    }
+    
 }

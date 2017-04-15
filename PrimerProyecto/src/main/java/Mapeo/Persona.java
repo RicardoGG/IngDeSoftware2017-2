@@ -18,7 +18,7 @@ public class Persona implements Serializable {
     @Column(name = "Correo")
     private String correo;
     
-    @Column(name = "nombres")
+    @Column(name = "Nombres")
     private String nombre;
     
     @Column(name = "apPaterno")
@@ -27,16 +27,30 @@ public class Persona implements Serializable {
     @Column(name = "apMaterno")
     private String apMaterno;
     
-    @Column(name = "contrasena")
+    @Column(name = "Contrasena")
     private String contrasenia;
     
-    /* Constructor de la clase Persona */
+    
+    public Persona(){
+        
+    }
+
+    
+    /* Constructor de la clase Persona*/
     public Persona(String nombre, String apPaterno, String apMaterno, String correo, String contrasenia){
         this.nombre = nombre;
         this.apPaterno = apPaterno;
         this.apMaterno = apMaterno;
         this.correo = correo;
         this.contrasenia = contrasenia;
+    }
+    
+    
+    
+    public String toString(){
+        String persona = "nombre: " + nombre + "\n" + "apPaterno: " + apPaterno + "\n" + "apMaterno: " + apMaterno +
+                "\n" + "Correo: " + correo + "\n" + "Contrasenia: " + contrasenia;
+        return persona;
     }
     
     /* Getters and Setters */

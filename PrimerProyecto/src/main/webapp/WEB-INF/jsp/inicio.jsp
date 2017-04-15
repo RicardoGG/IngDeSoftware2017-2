@@ -15,13 +15,18 @@
         <form method="POST" action="/PrimerProyecto/login">
             <h1>Iniciar Sesion</h1>
             <input id="nombre2" name ="correo" type="text" placeholder="Correo"><br>
-            <input id="nombre2" name ="passwd" type="text" placeholder="Contrasena"><br>
+            <input id="nombre2" name ="password" type="text" placeholder="Contrasena"><br>
             <button>Aceptar</button>
         </form>
+        
+        <br>
+        <h1>Registro</h1>
         <form method="submit" action="/PrimerProyecto/registrarse">
             <button>Registrarse</button>
         </form>
-        <form method="Post" action="\PrimerProyecto\verInformacionPuesto">
+        
+        
+        <form method="submit" action="/PrimerProyecto/verInformacion">
             <h1>Iniciar como Visitante</h1>
             <button>Aceptar</button>
         </form>

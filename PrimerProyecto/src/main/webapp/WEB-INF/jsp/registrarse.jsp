@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Registro</h1>
-        <form method="submit" action="/PrimerProyecto/formulario?">
+        <form method="POST" action="/PrimerProyecto/formulario">
             <form action="." oniput="range_control_value.value = range_control.valueAsNumber"/>
             Nombre: <br> <input id="name" name="nombre" type="text" placeholder="Nombre"/><br>
             Apellido Paterno: <br> <input id="paterno" name="paterno" type="text" placeholder="apPaterno"><br>
