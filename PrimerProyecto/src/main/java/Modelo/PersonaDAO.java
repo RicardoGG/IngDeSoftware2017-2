@@ -108,4 +108,30 @@ public class PersonaDAO {
         return per;
     }
     
+    
+    public Persona usuario_registrado(String correo){
+        Persona person = null;
+        
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        
+        try{
+            
+            tx = session.beginTransaction();
+            String hql = " from Persona where correo = :correo";
+            Query query = session.createQuery(hql);
+            query.setParameter("correo_persona", correo);
+            person = (Persona)query.uniqueResult();
+            tx.commit();
+            
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return person;
+    }
 }

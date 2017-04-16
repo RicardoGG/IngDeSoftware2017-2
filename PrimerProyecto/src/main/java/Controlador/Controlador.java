@@ -89,6 +89,7 @@ public class Controlador {
     public ModelAndView registro(ModelMap model,HttpServletRequest request){
         Persona p = null;
         Usuario u = null;
+        String wrong = "";
         
         String nombre = request.getParameter("nombre");
         String apPaterno = request.getParameter("paterno");
@@ -96,18 +97,30 @@ public class Controlador {
         String correo = request.getParameter("email");
         String pass = request.getParameter("password");
         
-        if(valida_email(correo) == false)
+        if(valida_email(correo) == false){
+            wrong = "Correo no valido. Debes usar un correo ciencias.";
+            model.addAttribute("mensaje",wrong);
             return new ModelAndView("error",model);
+        }
         else{
-            p = new Persona(nombre, apPaterno, apMaterno, correo, pass);
-            u = new Usuario(correo, "0");
-            persona.insert(p);
-            usuario.insert(u);
+            p = persona.usuario_registrado(correo);
+            if(p != null){
+                wrong = "Usuario ya registrado";
+                model.addAttribute("mensaje",wrong);
+                return new ModelAndView("error",model);
+            }
+            else{
+                p = new Persona(nombre, apPaterno, apMaterno, correo, pass);
+                u = new Usuario(correo, "0");
+                persona.insert(p);
+                usuario.insert(u);
+            }
         }
         //Faltan detalles.
         return new ModelAndView("inicio",model);
     }
     
+    // Metodo encargado de verificar que el dominio del correo sea de ciencias.
     private static boolean valida_email(String correo){
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 
