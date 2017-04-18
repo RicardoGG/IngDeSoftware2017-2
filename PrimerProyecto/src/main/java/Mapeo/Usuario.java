@@ -26,6 +26,10 @@ public class Usuario implements Serializable {
     @Column(name = "administrador")
     private String administrador;
     
+    public Usuario(){
+        
+    }
+    
     public Usuario(String correo, String administrador){
         this.correo_us = correo;
         this.administrador = administrador;

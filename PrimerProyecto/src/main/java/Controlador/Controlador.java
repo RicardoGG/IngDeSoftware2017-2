@@ -28,7 +28,8 @@ public class Controlador {
     @Autowired
     PersonaDAO persona;
     
-    private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@ciencias.unam.mx";
+    
+    private final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-z0-0-]+)*@ciencias.unam.mx$";
     
     @RequestMapping(value="/")
     public String inicio(){
@@ -85,6 +86,14 @@ public class Controlador {
     }
     
     
+    private boolean valida_email(String correo){
+        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+
+        Matcher matcher = pattern.matcher(correo);
+        return matcher.matches();
+    }
+    
+    
     @RequestMapping(value="/formulario", method = RequestMethod.POST)
     public ModelAndView registro(ModelMap model,HttpServletRequest request){
         Persona p = null;
@@ -120,12 +129,6 @@ public class Controlador {
         return new ModelAndView("inicio",model);
     }
     
-    // Metodo encargado de verificar que el dominio del correo sea de ciencias.
-    private static boolean valida_email(String correo){
-        Pattern pattern = Pattern.compile(PATTERN_EMAIL);
-
-        Matcher matcher = pattern.matcher(correo);
-        return matcher.matches();
-    }
+    
     
 }
