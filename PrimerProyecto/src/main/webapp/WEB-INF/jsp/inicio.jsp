@@ -10,8 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pagina de Inicio</title>
+        <link rel="stylesheet" type="text/css" href="css/Inicio.css">
     </head>
-    <body>
+    <div class="blur">
+    <body class="bgcolor">
+        <div class="box">
         <form method="POST" action="/PrimerProyecto/login">
             <h1>Iniciar Sesion</h1>
             <input id="nombre2" name ="correo" type="text" placeholder="Correo"><br>
@@ -29,6 +32,9 @@
         <form method="submit" action="/PrimerProyecto/verInformacion">
             <h1>Iniciar como Visitante</h1>
             <button>Aceptar</button>
-        </form>
+        </form>    
+        </div>
+        
     </body>
+    </div>
 </html>
