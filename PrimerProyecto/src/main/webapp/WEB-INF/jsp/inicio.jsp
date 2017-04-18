@@ -13,24 +13,24 @@
         <link rel="stylesheet" type="text/css" href="css/Inicio.css">
     </head>
     <div class="blur">
-    <body class="bgcolor">
+    <body class="bgcolor" style="display: table">
         <div class="box">
         <form method="POST" action="/PrimerProyecto/login">
-            <h1>Iniciar Sesion</h1>
+            <p class="titles">Iniciar Sesion</p>
             <input id="nombre2" name ="correo" type="text" placeholder="Correo"><br>
             <input id="nombre2" name ="password" type="text" placeholder="Contrasena"><br>
             <button>Aceptar</button>
         </form>
         
         <br>
-        <h1>Registro</h1>
+        <p class="titles">Registro</p>
         <form method="submit" action="/PrimerProyecto/registrarse">
             <button>Registrarse</button>
         </form>
         
         
         <form method="submit" action="/PrimerProyecto/verInformacion">
-            <h1>Iniciar como Visitante</h1>
+            <p class="titles">Iniciar como Visitante</p>
             <button>Aceptar</button>
         </form>    
         </div>
