@@ -35,7 +35,7 @@ public class Controlador {
     PuestoDAO puesto;
     
     
-    private final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-z0-0-]+)*@ciencias.unam.mx$";
+    private final String PATTERN_EMAIL = "^[\\w-]+(\\.[\\w-]+)*@ciencias.unam.mx$";
     
     @RequestMapping(value="/")
     public String inicio(){
