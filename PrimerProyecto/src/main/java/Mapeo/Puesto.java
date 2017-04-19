@@ -22,6 +22,14 @@ public class Puesto implements Serializable {
     
     @Column(name = "Calificacion")
     private int calificacion;
+    
+    public Puesto(){}
+    
+    public Puesto(String idnombre, String ubicacion, int calificacion){
+        this.idNombre = idnombre;
+        this.ubicacion = ubicacion;
+        this.calificacion = calificacion;
+    }
 
     public String getIdNombre() {
         return idNombre;

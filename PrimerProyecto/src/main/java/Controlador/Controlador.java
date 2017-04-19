@@ -2,9 +2,12 @@
 package Controlador;
 
 import Mapeo.Persona;
+import Mapeo.Puesto;
 import Mapeo.Usuario;
 import Modelo.PersonaDAO;
+import Modelo.PuestoDAO;
 import Modelo.UsuarioDAO;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +31,9 @@ public class Controlador {
     @Autowired
     PersonaDAO persona;
     
+    @Autowired
+    PuestoDAO puesto;
+    
     
     private final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-z0-0-]+)*@ciencias.unam.mx$";
     
@@ -39,6 +45,18 @@ public class Controlador {
     
     @RequestMapping(value="/verInformacion", method = RequestMethod.GET)
     public ModelAndView verInformacionPuesto(ModelMap model,HttpServletRequest request){
+        
+        String wrong = "";
+        List<Puesto> puestos_registrados = puesto.list_puestos();
+        
+        if(puestos_registrados == null){
+            wrong = "Error al cargar la información.";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        }
+        
+        model.addAttribute("puestos", puestos_registrados);
+        
         return new ModelAndView("verInformacionPuesto",model);
     }
     
@@ -114,7 +132,7 @@ public class Controlador {
         else{
             p = persona.usuario_registrado(correo);
             if(p != null){
-                wrong = "Usuario ya registrado";
+                wrong = "Usuario ya registrado.";
                 model.addAttribute("mensaje",wrong);
                 return new ModelAndView("error",model);
             }
@@ -125,7 +143,6 @@ public class Controlador {
                 usuario.insert(u);
             }
         }
-        //Faltan detalles.
         return new ModelAndView("inicio",model);
     }
     

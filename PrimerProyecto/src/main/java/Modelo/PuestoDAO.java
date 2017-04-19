@@ -1,6 +1,8 @@
 package Modelo;
 
 import Mapeo.Puesto;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -81,5 +83,35 @@ public class PuestoDAO {
             e.printStackTrace();
         }
         finally { session.close(); }
+    }
+    
+    /**
+     * Obtenemos la lista de puestos.
+     * @return La lista de puestos registrados.
+     */
+    public List<Puesto> list_puestos(){
+        List<Puesto> puestos = null;
+        
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        
+        try{
+            
+            tx = session.beginTransaction();
+            String hql = "from Puesto";
+            Query query = session.createQuery(hql);
+            puestos = (List<Puesto>)query.list();
+            tx.commit();
+            
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return puestos;
     }
 }
