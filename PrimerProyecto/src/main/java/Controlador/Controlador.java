@@ -34,15 +34,20 @@ public class Controlador {
     @Autowired
     PuestoDAO puesto;
     
-    
+    // Expresion regular que verifica el correo.
     private final String PATTERN_EMAIL = "^[\\w-]+(\\.[\\w-]+)*@ciencias.unam.mx$";
     
+    /*
+     * Carga la pagina de inicio.
+    */
     @RequestMapping(value="/")
     public String inicio(){
         return "inicio";
     }
     
-    
+    /*
+     * Carga los puestos de la base.
+    */
     @RequestMapping(value="/verInformacion", method = RequestMethod.GET)
     public ModelAndView verInformacionPuesto(ModelMap model,HttpServletRequest request){
         
@@ -60,7 +65,9 @@ public class Controlador {
         return new ModelAndView("verInformacionPuesto",model);
     }
     
-    
+    /*
+     * Cambia de la vista de inicio a el formulario.
+    */
     @RequestMapping(value="/registrarse", method = RequestMethod.GET)
     public ModelAndView registrarse(ModelMap model,HttpServletRequest request){
         return new ModelAndView("registrarse",model);
@@ -68,7 +75,9 @@ public class Controlador {
     
     
     
-    
+    /*
+     * Iniciar Sesion
+    */
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public ModelAndView login(ModelMap model, HttpServletRequest request){
         String email = request.getParameter("correo");
@@ -86,6 +95,10 @@ public class Controlador {
             model.addAttribute("mensaje",wrong);
             return new ModelAndView("error",model);
         }else if(pas.equals(p.getContrasenia())){
+
+            if(usuario.es_Admin(email).equals("1"))
+                return new ModelAndView("registrarse", model);
+
             String nombre = p.getNombre();
             String apellidoPat = p.getApPaterno();
             String apellidoMat = p.getApMaterno();
@@ -103,7 +116,9 @@ public class Controlador {
         return new ModelAndView("perfil",model);
     }
     
-    
+    /*
+     * Metodo encargado de validar correo.
+    */
     private boolean valida_email(String correo){
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 
@@ -111,7 +126,10 @@ public class Controlador {
         return matcher.matches();
     }
     
-    
+    /*
+     * Recibe los valores ingresados en el formulario.
+     * Si son correctos se guardara al usuario nuevo.
+    */
     @RequestMapping(value="/formulario", method = RequestMethod.POST)
     public ModelAndView registro(ModelMap model,HttpServletRequest request){
         Persona p = null;

@@ -108,4 +108,31 @@ public class UsuarioDAO {
         return user;
     }
     
+    /**
+     * Revisamos si un usuario es administrador.
+     * @param correo correo del usuario a revisar.
+    */
+    public String es_Admin(String correo){
+        String admin = "";
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "select administrador from Usuario where correo_us = :correoPam";
+            Query query = session.createQuery(hql);
+            query.setParameter("correoPam", correo);
+            admin = (String)query.uniqueResult();
+            tx.commit();
+        }
+        catch (Exception e) {
+           if (tx!=null){ 
+               tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+           session.close();
+        }
+        return admin;
+    }
+    
 }
