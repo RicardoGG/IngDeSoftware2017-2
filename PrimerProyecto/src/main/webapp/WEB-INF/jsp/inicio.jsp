@@ -18,7 +18,7 @@
         <form method="POST" action="/PrimerProyecto/login">
             <p class="titles">Iniciar Sesion</p>
             <input id="nombre2" name ="correo" type="text" placeholder="Correo"><br>
-            <input id="nombre2" name ="password" type="text" placeholder="Contrasena"><br>
+            <input id="nombre2" name ="password" type="password" placeholder="Contrasena"><br>
             <button>Aceptar</button>
         </form>
         
