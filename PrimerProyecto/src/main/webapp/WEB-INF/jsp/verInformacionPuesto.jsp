@@ -110,6 +110,8 @@
 
                 marker3.addListener('mouseover', function () {
                     harry.open(map, marker3);
+                    this.document.window.alert("ola k ase :V ");
+                    console.log("aqui toy")
                 });
                 
                 marker3.addListener('mouseout', function () {

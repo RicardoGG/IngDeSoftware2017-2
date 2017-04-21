@@ -97,7 +97,7 @@ public class Controlador {
         }else if(pas.equals(p.getContrasenia())){
 
             if(usuario.es_Admin(email).equals("1"))
-                return new ModelAndView("registrarse", model);
+                return new ModelAndView("AdministradorIH", model);
 
             String nombre = p.getNombre();
             String apellidoPat = p.getApPaterno();
