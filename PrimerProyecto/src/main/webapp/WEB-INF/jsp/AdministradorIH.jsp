@@ -10,15 +10,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrador</title>
+            <link rel="stylesheet" type="text/css" href="css/administrador.css">
     </head>
+    
     <body>
-        <h1>Lista de Puestos:</h1>
-       <form method="submit" action="/PrimerProyecto/ActualizarPuestoIH">
+        <div class="box">
+            <p class="titles" <h1>Lista de Puestos:</h1> </p></div>  
+        <div class="blur">
+            <div class="zoom">    <body class="bgcolor" style="display: table">
+        <form method="submit" action="/PrimerProyecto/ActualizarPuestoIH">
         <c:forEach var="puesto" items="${p}">
-            ${puesto.nombre}
-            <button>Actualizar</button>
-        </form>
-        </c:forEach>
+             ${puesto.nombre}>
+            <button>Actualizar</button> 
+        </form></div>
+        </c:forEach></div>
             
     </body>
 </html>

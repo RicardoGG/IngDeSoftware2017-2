@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20/04/2017, 10:48:03 PM
+    Author     : rgarciag
+*/
+
+.bgcolor{
+     background-image: url("prometeo.jpg")   
+}
+
+.titles{
+   color: #FFFFFF;
+   font-size: 15pt;
+   font-weight: bold;
+}
+
+.box{
+    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(102,178,255,0.8);
+    width: 80%;
+    height: 20%;
+    border: 5px solid #F4F4F5;
+    border-radius: 20px;
+    margin: auto;
+}
