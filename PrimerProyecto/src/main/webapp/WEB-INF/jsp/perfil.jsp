@@ -12,7 +12,10 @@
         <title>Perfil Usuario</title>
     </head>
     <body>
-        <h1>Bienvenido</h1>
+        <h1>Bienvenido</h1> 
+        <form method ="POST" action="/PrimerProyecto/cerrarSesion">
+        <button> Cerrar Sesión</button>
+        </form>
             <h2> 
                 <br> ${nombre}
                 <br> ${apellidoPat}

@@ -18,7 +18,10 @@
 
     <body>
         <div class="box">
-            <p class="titles" <h1>Lista de Puestos:</h1> </p></div>  
+            <p class="titles" <h1>Lista de Puestos:</h1> </p></div> 
+              <form method ="POST" action="/PrimerProyecto/cerrarSesion">
+                <button> Cerrar Sesión</button>
+              </form>
     <div class="blur">
         <div class="zoom">    <body class="bgcolor" style="display: table">
 

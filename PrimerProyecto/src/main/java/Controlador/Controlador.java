@@ -7,10 +7,15 @@ import Mapeo.Usuario;
 import Modelo.PersonaDAO;
 import Modelo.PuestoDAO;
 import Modelo.UsuarioDAO;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -114,6 +119,24 @@ public class Controlador {
             return new ModelAndView("error",model);
         }
         return new ModelAndView("perfil",model);
+    }
+    
+    /**
+     * Metodo para cerrar sesión
+     * 
+     * @param model-el modelo
+     * @param request-la solicitud
+     * @param response-la respuesta
+     * @return ModelAndView-la página de inicio
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException
+     */
+    @RequestMapping(value="/cerrarSesion", method = RequestMethod.POST)
+    public ModelAndView cerrarSesion(ModelMap model,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        HttpSession sesion = request.getSession(true);
+        //Invalidamos la sesion y desvinculamos los objetos asociados a ella
+        sesion.invalidate();
+        return new ModelAndView("inicio", model);
     }
     
     /*
