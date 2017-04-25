@@ -9,10 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Error</title>
+        <title>¡Error!</title>
+        <link rel="stylesheet" type="text/css" href="css/general_style.css">
+        <link rel="stylesheet" type="text/css" href="css/error.css">
     </head>
-    <body>
-        <h1>Error</h1>
-        <br>${mensaje}
+    <body class="bgimage">
+        <div class="box">
+            <p class="error_title">¡Error!</p>
+            <p class="text">${mensaje}</p>
+        </div>
     </body>
 </html>
