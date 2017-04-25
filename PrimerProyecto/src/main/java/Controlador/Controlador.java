@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import Mapeo.Persona;
@@ -29,131 +28,130 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class Controlador {
-    
+
     @Autowired
     UsuarioDAO usuario;
-    
+
     @Autowired
     PersonaDAO persona;
-    
+
     @Autowired
     PuestoDAO puesto;
-    
+
+    String edit_puesto;
+
     // Expresion regular que verifica el correo.
     private final String PATTERN_EMAIL = "^[\\w-]+(\\.[\\w-]+)*@ciencias.unam.mx$";
-    
+
     /*
      * Carga la pagina de inicio.
-    */
-    @RequestMapping(value="/")
-    public String inicio(){
+     */
+    @RequestMapping(value = "/")
+    public String inicio() {
         return "inicio";
     }
-    
+
     /*
      * Carga los puestos de la base.
-    */
-    @RequestMapping(value="/verInformacion", method = RequestMethod.GET)
-    public ModelAndView verInformacionPuesto(ModelMap model,HttpServletRequest request){
-        
+     */
+    @RequestMapping(value = "/verInformacion", method = RequestMethod.GET)
+    public ModelAndView verInformacionPuesto(ModelMap model, HttpServletRequest request) {
+
         String wrong = "";
         List<Puesto> puestos_registrados = puesto.list_puestos();
-        
-        if(puestos_registrados == null){
+
+        if (puestos_registrados == null) {
             wrong = "Error al cargar la información.";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
         }
-        
+
         model.addAttribute("puestos", puestos_registrados);
-        
-        return new ModelAndView("verInformacionPuesto",model);
+
+        return new ModelAndView("verInformacionPuesto", model);
     }
-    
+
     /*
      * Cambia de la vista de inicio a el formulario.
-    */
-    @RequestMapping(value="/registrarse", method = RequestMethod.GET)
-    public ModelAndView registrarse(ModelMap model,HttpServletRequest request){
-        return new ModelAndView("registrarse",model);
-    }
-    
-    
-    /**
-     * Cambia de la vista al formulario de cracion de puestos. 
      */
-    @RequestMapping(value="/crearPuesto", method = RequestMethod.GET)
-    public ModelAndView creaPuest(ModelMap model, HttpServletRequest request){
-        return new ModelAndView("crearPuesto",model);
+    @RequestMapping(value = "/registrarse", method = RequestMethod.GET)
+    public ModelAndView registrarse(ModelMap model, HttpServletRequest request) {
+        return new ModelAndView("registrarse", model);
     }
-    
-    
+
+    /**
+     * Cambia de la vista al formulario de cracion de puestos.
+     */
+    @RequestMapping(value = "/crearPuesto", method = RequestMethod.GET)
+    public ModelAndView creaPuest(ModelMap model, HttpServletRequest request) {
+        return new ModelAndView("crearPuesto", model);
+    }
+
     /**
      * Cambia de la vista a la lista de puestos en la base de datos.
      */
-    @RequestMapping(value="/leerPuesto", method = RequestMethod.GET)
-    public ModelAndView leerPuesto(ModelMap model, HttpServletRequest request){
+    @RequestMapping(value = "/leerPuesto", method = RequestMethod.GET)
+    public ModelAndView leerPuesto(ModelMap model, HttpServletRequest request) {
         String wrong = "";
         List<Puesto> puestos_registrados = puesto.list_puestos();
-        
-        if(puestos_registrados == null){
+
+        if (puestos_registrados == null) {
             wrong = "Error al cargar la información.";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
         }
-        
+
         model.addAttribute("puestos", puestos_registrados);
-        
-        return new ModelAndView("LeerPuesto",model);
+
+        return new ModelAndView("LeerPuesto", model);
     }
-    
+
     /**
      * Cambia de la vista al formulario de eliminacion de puestos.
      */
-    @RequestMapping(value="/elimPuest", method = RequestMethod.POST)
-    public ModelAndView elimPuest(ModelMap model, HttpServletRequest request){
+    @RequestMapping(value = "/elimPuest", method = RequestMethod.POST)
+    public ModelAndView elimPuest(ModelMap model, HttpServletRequest request) {
         List<Puesto> puest = puesto.list_puestos();
         String wrong = "";
-        if(puest == null){
+        if (puest == null) {
             wrong = "Error al cargar la información.";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
         }
-        model.addAttribute("puestos",puest);
-        return new ModelAndView("eliminarPuesto",model);
+        model.addAttribute("puestos", puest);
+        return new ModelAndView("eliminarPuesto", model);
     }
-    
-    
+
     /*
      * Iniciar Sesion
-    */
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public ModelAndView login(ModelMap model, HttpServletRequest request){
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView login(ModelMap model, HttpServletRequest request) {
         String email = request.getParameter("correo");
         String pas = request.getParameter("password");
         String wrong = "";
-        Usuario u = usuario.getUser(email,pas);
-        if(u == null){
+        Usuario u = usuario.getUser(email, pas);
+        if (u == null) {
             wrong = "usuario no valido";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
         }
-        Persona p = persona.getPersona(u.getCorreo_us(),pas);
-        if(p == null){
+        Persona p = persona.getPersona(u.getCorreo_us(), pas);
+        if (p == null) {
             wrong = "correo invalido, favor de verificarlo";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
-        }else if(pas.equals(p.getContrasenia())){
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
+        } else if (pas.equals(p.getContrasenia())) {
 
-            if(usuario.es_Admin(email).equals("1")){
+            if (usuario.es_Admin(email).equals("1")) {
                 List<Puesto> puestos_registrados = puesto.list_puestos();
-        
-                if(puestos_registrados == null){
+
+                if (puestos_registrados == null) {
                     wrong = "Error al cargar la información.";
-                    model.addAttribute("mensaje",wrong);
-                    return new ModelAndView("error",model);
+                    model.addAttribute("mensaje", wrong);
+                    return new ModelAndView("error", model);
                 }
-        
+
                 model.addAttribute("puestos", puestos_registrados);
                 return new ModelAndView("AdministradorIH", model);
             }
@@ -162,22 +160,22 @@ public class Controlador {
             String apellidoPat = p.getApPaterno();
             String apellidoMat = p.getApMaterno();
             String correo = p.getCorreo();
-           
-            model.addAttribute("nombre",nombre);
-            model.addAttribute("apellidoPat",apellidoPat);
-            model.addAttribute("apellidoMat",apellidoMat);
-            model.addAttribute("correo",correo);
-        }else{
+
+            model.addAttribute("nombre", nombre);
+            model.addAttribute("apellidoPat", apellidoPat);
+            model.addAttribute("apellidoMat", apellidoMat);
+            model.addAttribute("correo", correo);
+        } else {
             wrong = "La contraseña es incorrecta, favor de verificarla";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
         }
-        return new ModelAndView("perfil",model);
+        return new ModelAndView("perfil", model);
     }
-    
+
     /**
      * Metodo para cerrar sesión
-     * 
+     *
      * @param model-el modelo
      * @param request-la solicitud
      * @param response-la respuesta
@@ -185,197 +183,201 @@ public class Controlador {
      * @throws javax.servlet.ServletException
      * @throws java.io.IOException
      */
-    @RequestMapping(value="/cerrarSesion", method = RequestMethod.POST)
-    public ModelAndView cerrarSesion(ModelMap model,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    @RequestMapping(value = "/cerrarSesion", method = RequestMethod.POST)
+    public ModelAndView cerrarSesion(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sesion = request.getSession(true);
         //Invalidamos la sesion y desvinculamos los objetos asociados a ella
         sesion.invalidate();
         return new ModelAndView("inicio", model);
     }
-    
+
     /*
      * Metodo encargado de validar correo.
-    */
-    private boolean valida_email(String correo){
+     */
+    private boolean valida_email(String correo) {
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 
         Matcher matcher = pattern.matcher(correo);
         return matcher.matches();
     }
-    
+
     /*
      * Recibe los valores ingresados en el formulario.
      * Si son correctos se guardara al usuario nuevo.
-    */
-    @RequestMapping(value="/formulario", method = RequestMethod.POST)
-    public ModelAndView registro(ModelMap model,HttpServletRequest request){
+     */
+    @RequestMapping(value = "/formulario", method = RequestMethod.POST)
+    public ModelAndView registro(ModelMap model, HttpServletRequest request) {
         Persona p = null;
         Usuario u = null;
         String wrong = "";
-        
+
         String nombre = request.getParameter("nombre");
         String apPaterno = request.getParameter("paterno");
         String apMaterno = request.getParameter("materno");
         String correo = request.getParameter("email");
         String pass = request.getParameter("password");
-        
-        if(valida_email(correo) == false){
+
+        if (valida_email(correo) == false) {
             wrong = "Correo no valido. Debes usar un correo ciencias.";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
-        }
-        else{
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
+        } else {
             p = persona.usuario_registrado(correo);
-            if(p != null){
+            if (p != null) {
                 wrong = "Usuario ya registrado.";
-                model.addAttribute("mensaje",wrong);
-                return new ModelAndView("error",model);
-            }
-            else{
+                model.addAttribute("mensaje", wrong);
+                return new ModelAndView("error", model);
+            } else {
                 p = new Persona(nombre, apPaterno, apMaterno, correo, pass);
                 u = new Usuario(correo, "0");
                 persona.insert(p);
                 usuario.insert(u);
             }
         }
-        return new ModelAndView("inicio",model);
+        return new ModelAndView("inicio", model);
     }
-    
-    
-    
+
     /**
      * Metodo para crear nuevos puestos
      */
-    @RequestMapping(value="/formularioPuesto", method = RequestMethod.POST)
-    public ModelAndView creaPuesto(ModelMap model,HttpServletRequest request){
+    @RequestMapping(value = "/formularioPuesto", method = RequestMethod.POST)
+    public ModelAndView creaPuesto(ModelMap model, HttpServletRequest request) {
         String nombre = request.getParameter("nombre");
         String ubicacion = request.getParameter("ubicacion");
-        
+
         Puesto puest = null;
         String wrong = "";
-        
-        if(nombre.equals("")){
+
+        if (nombre.equals("")) {
             wrong = "El nombre del puesto no puede estar vacio favor de poner un nombre";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
-        } else if (ubicacion.equals("")){
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
+        } else if (ubicacion.equals("")) {
             wrong = "La ubicacion no puede estar vacia, favor de poner un nombre";
             model.addAttribute("mensaje", wrong);
             return new ModelAndView("error", model);
         } else {
             puest = puesto.verificaPuesto(nombre);
-            if(puest != null){
+            if (puest != null) {
                 wrong = "El puesto ya existe";
                 model.addAttribute("mensaje", wrong);
-                return new ModelAndView("error",model);
-            }else{
-                puest = new Puesto(nombre,ubicacion,0);
+                return new ModelAndView("error", model);
+            } else {
+                puest = new Puesto(nombre, ubicacion, 0);
                 puesto.insert(puest);
             }
         }
-        
-        return new ModelAndView("AdministradorIH",model);
+
+        return new ModelAndView("AdministradorIH", model);
     }
-    
+
     /**
-     * Metodo para eliminar un puesto de la base de datos (para el Administrador) 
+     * Metodo para eliminar un puesto de la base de datos (para el
+     * Administrador)
      */
-    @RequestMapping(value="/eliminarPuesto", method = RequestMethod.POST)
-    public ModelAndView eliminarPuesto(ModelMap model,HttpServletRequest request){
+    @RequestMapping(value = "/eliminarPuesto", method = RequestMethod.POST)
+    public ModelAndView eliminarPuesto(ModelMap model, HttpServletRequest request) {
         String nombre = request.getParameter("puesto");
-        
+
         Puesto puest = puesto.verificaPuesto(nombre);
         String wrong = "";
-        
-        if(puest == null){
+
+        if (puest == null) {
             wrong = "El puesto no esta en la base de datos, favor de verificar el nombre";
             model.addAttribute("mensaje", wrong);
-            return new ModelAndView("error",model);
-        }else{
+            return new ModelAndView("error", model);
+        } else {
             puesto.delete(nombre);
         }
-        return new ModelAndView("AdministradorIH",model);
-        
+        return new ModelAndView("AdministradorIH", model);
+
     }
-    
+
     /**
      * Regresa a la vista del administrador.
+     *
      * @param model
      * @param request
      * @return la vista del administrador.
      */
-    @RequestMapping(value="/cancelar", method = RequestMethod.POST)
-    public ModelAndView cancelar(ModelMap model, HttpServletRequest request){
+    @RequestMapping(value = "/cancelar", method = RequestMethod.POST)
+    public ModelAndView cancelar(ModelMap model, HttpServletRequest request) {
         return new ModelAndView("AdministradorIH", model);
     }
-    
+
     /**
      * Regresa a la vista del administrador.
+     *
      * @param model
      * @param request
      * @return la vista del puesto a modificar.
      */
-    @RequestMapping(value="/modificarPuesto", method = RequestMethod.GET)
-    public ModelAndView modificarPuesto(ModelMap model, HttpServletRequest request){
-        return new ModelAndView("actualizarPuestoIH", model);
+    @RequestMapping(value = "/modificarPuesto", method = RequestMethod.GET)
+    public ModelAndView modificarPuesto(ModelMap model, HttpServletRequest request) {
+        List<Puesto> puest = puesto.list_puestos();
+        model.addAttribute("puestos", puest);
+        return new ModelAndView("modificarPuestoIH", model);
     }
-    
+
     /**
-     * redirige a la calificacion de puesto
+     * Va a la vista con los datos del puesto.
+     *
+     * @param model
+     * @param request
+     * @return la vista del puesto a modificar.
      */
-    @RequestMapping(value="/calificacionPuesto", method = RequestMethod.POST)
-    public ModelAndView calificarPuestoP(ModelMap model,HttpServletRequest request){
-        return new ModelAndView("calificarPuesto",model);
-    }
-    
-    /*
-    Calificacion del puesto
-    */
-     @RequestMapping(value="/calificarPuesto", method = RequestMethod.POST)
-    public ModelAndView calificarPuesto(ModelMap model,HttpServletRequest request){
-        String nombre = request.getParameter("nombre");
-        String ubicacion = request.getParameter("ubicacion");
-        String calificacion = request.getParameter("calificacion");
-        
-        Puesto puest;
-            String wrong = "";
-        
-        if(nombre.equals("")){
-            wrong = "El nombre del puesto no puede estar vacio favor de poner un nombre";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
-        } else if (ubicacion.equals("")){
-            wrong = "La ubicacion no puede estar vacia, favor de poner un número";
+    @RequestMapping(value = "/editPuesto", method = RequestMethod.POST)
+    public ModelAndView editPuesto(ModelMap model, HttpServletRequest request) {
+        String nombre_puesto = request.getParameter("puesto");
+        Puesto p = puesto.verificaPuesto(nombre_puesto);
+
+        if (p == null) {
+            String wrong = "Puesto no encontrado";
             model.addAttribute("mensaje", wrong);
             return new ModelAndView("error", model);
-        } else{
-            int c = Integer.parseInt(calificacion);
-            puest = new Puesto(nombre,ubicacion,c);
-            puesto.update(puest);
         }
-                   
-        return new ModelAndView("verInformacionPuestoRegistrados",model);
+
+        String nombre = p.getIdNombre();
+        String ubicacion = p.getUbicacion();
+        int calificacion = p.getCalificacion();
+
+        model.addAttribute("nombre", nombre);
+        model.addAttribute("ubicacion", ubicacion);
+        model.addAttribute("calificacion", calificacion);
+
+        return new ModelAndView("actualizarPuestoIH", model);
     }
+
     /**
-     * Funcion que regresa la informacion de los puestos con un usuario registrado
+     * Va a la vista con los datos del puesto.
+     *
      * @param model
-     * @return 
+     * @param request
+     * @return la vista del puesto a modificar.
      */
-    @RequestMapping(value="/verInfoRegistrado", method = RequestMethod.POST)
-    public ModelAndView verInformacionPuestoUsReg(ModelMap model,HttpServletRequest request){
-        
-        String wrong = "";
-        List<Puesto> puestos_registrados = puesto.list_puestos();
-        
-        if(puestos_registrados == null){
-            wrong = "Error al cargar la información.";
-            model.addAttribute("mensaje",wrong);
-            return new ModelAndView("error",model);
+    @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
+    public ModelAndView actualizar(ModelMap model, HttpServletRequest request) {
+        String nombre = request.getParameter("nombre");
+        String ubicacion = request.getParameter("ubicacion");
+
+        Puesto p = puesto.verificaPuesto(nombre);
+
+        if (p == null) {
+            if (ubicacion.equals(""))  
+               p = new Puesto(nombre);
+            else
+                p = new Puesto(nombre, ubicacion, 0);
+
+            puesto.insert(p);
+            return new ModelAndView("AdministradorIH", model);
         }
-        
-        model.addAttribute("puestos", puestos_registrados);
-        
-        return new ModelAndView("verInformacionPuestoRegistrados",model);
+
+        if (ubicacion.equals(""))
+                ubicacion = p.getUbicacion();
+
+        p.setUbicacion(ubicacion);
+        puesto.update(p);
+
+        return new ModelAndView("AdministradorIH", model);
     }
-    
 }

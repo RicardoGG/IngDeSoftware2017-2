@@ -30,6 +30,12 @@ public class Puesto implements Serializable {
         this.ubicacion = ubicacion;
         this.calificacion = calificacion;
     }
+    
+    public Puesto(String idnombre){
+        this.idNombre = idnombre;
+        this.ubicacion = "Desconocido";
+        this.calificacion = 0;
+    }
 
     public String getIdNombre() {
         return idNombre;
