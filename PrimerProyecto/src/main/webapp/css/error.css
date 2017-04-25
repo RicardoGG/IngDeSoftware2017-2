@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 25, 2017, 8:52:53 AM
+    Author     : servando
+*/
+
+.box{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 30%;
+    background-color: rgba(49,54,76,0.95);
+    width: 40%;
+    height: 30%;
+    padding: 3% ;
+    border: 5px solid #F4F4F5;
+    border-radius: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.error_title{
+   color: #BFCAC0; 
+   font-size: 20pt;
+   font-weight: bold;
+   text-align: center;
+   font-family: verdana;
+}
+
+.text{
+   color: #F4F4F5; 
+   font-size: 13pt;
+   font-weight: bold;
+   margin: 0;
+   font-family: verdana;
+   text-align: center;
+}

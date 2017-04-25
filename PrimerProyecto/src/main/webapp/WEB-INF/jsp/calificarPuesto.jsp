@@ -12,11 +12,11 @@
         <title>Calificar Puesto</title>
     </head>
     <body>
-        <h1>Califica el puesto</h1>
-        <form method="POST" action="/PrimerProyecto/formularioPuesto">
+        <h1>Calificar</h1>
+        <form method="POST" action="/PrimerProyecto/calificacionPuesto">
             <form action="." oniput="range_control_value.value = range_control.valueAsNumber"/>
             Nombre: <br> <input id="name" name="nombre" type="text" placeholder="Nombre"/><br>
-            Ubicacion: <br> <input id="ubicacion" name="ubicacion" type="text" placeholder="Ubicacion" /><br>
-            <button>Aceptar</button>
+            Calificacion: <br> <input id="calificacion" name="calificacion" type="text" placeholder="calificacion" /><br>
         </form>
+            <form method="POST" action="/PrimerProyecto/calificarPuesto"> <button>Aceptar</button></form>
     </body>

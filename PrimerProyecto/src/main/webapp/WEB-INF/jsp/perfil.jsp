@@ -16,6 +16,9 @@
         <form method ="POST" action="/PrimerProyecto/cerrarSesion">
         <button> Cerrar Sesión</button>
         </form>
+        <form method ="POST" action="/PrimerProyecto/verInfoRegistrado">
+            <button> Ver informacion de puestos</button>
+        </form>
             <h2> 
                 <br> ${nombre}
                 <br> ${apellidoPat}
