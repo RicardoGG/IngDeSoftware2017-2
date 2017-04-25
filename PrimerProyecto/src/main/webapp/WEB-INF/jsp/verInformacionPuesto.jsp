@@ -12,31 +12,35 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/general_style.css">
+        <link rel="stylesheet" type="text/css" href="css/verInformacion.css">
         <title>Ver Informacion</title>
 
-        <style type="text/css">
-            html, body{ height: 100%; margin: 0; padding: 0;}
-            #map {height: 100%; top: 0%; margin-left: 25%; margin-right: 25%; margin-top: 2%; margin-bottom: 2% }
-        </style>
+        
 
     </head>
-    <body>
-        <h1>Puestos:</h1>
+    <body class="bgimage">
+        <div class="box">
+          <h1 class="titles">Puestos:</h1>
 
         <form action="." oninput="range_control_value.value = range_control.valueAsNumber">
             <h2>
                 <c:forEach var="puesto" items="${puestos}">
-                    <B>Nombre: </B>${puesto.idNombre}<br>
+                    <p class="titles">Nombre: </p><div class="text">${puesto.idNombre}<br>
                         <%--${puesto.horario}<br>
                         ${puesto.alimentos}<br>--%>
                     <B>Ubicacion: </B>${puesto.ubicacion}<br>
-                    <br>
+                    <br></div>
                 </c:forEach>
             </h2>
         </form>
+        </div>
+
 
         <!-- MAPA -->
-        <div id = "map"></div>
+        <div id = "map" class="map">
+            
+        </div>
 
         <script type="text/javascript">
             var map;
