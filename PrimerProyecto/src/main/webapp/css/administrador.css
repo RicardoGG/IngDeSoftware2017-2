@@ -5,11 +5,14 @@ and open the template in the editor.
 */
 /* 
     Created on : 20/04/2017, 10:48:03 PM
-    Author     : rgarciag
+    Author     : rgarciagl
+
 */
 
 .bgcolor{
-     background-image: url("prometeo.jpg")   
+    background-image: url("prometeo.jpg") no-repeat;
+    background-size: 100%;
+    
 }
 
 .titles{

@@ -1,0 +1,98 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 25, 2017, 4:08:31 PM
+    Author     : servando
+*/
+
+.bgcolor{
+    background-image: url("prometeo.jpg");
+    background-size: 100%;
+    
+}
+
+.header{
+  position: relative;
+  right: 0;
+  top: 0;
+  width: 100%;
+  margin: 0;
+  left: 0;
+  height: 10%;
+  padding: 0;
+  background-color: #31364C;
+  text-align: center;
+  color: #BFCAC0;
+}
+
+body,html{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+
+
+.title_page{
+   color: #F4F4F5; 
+   font-size: 15pt;
+   font-weight: bold;
+   font-family: verdana;
+   
+   padding: 0;
+   margin: 0;
+   padding-top:10px;
+}
+
+.titles{
+   color: #FFFFFF;
+   font-size: 15pt;
+   font-weight: bold;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    font-size: 15pt;
+    font-family: verdana;
+    padding-left: 4%;
+    color: #31364C;
+    font-weight: bold;
+    padding-bottom: 15%; 
+}
+
+.logo{
+    padding-bottom: 5%;
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    width: 60%;
+    height: auto;
+}
+.sidemenu{
+    width: 25%;
+    relative:0;
+    background-color: #BFCAC0;
+    height: 90%;
+}
+
+.box{
+    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(102,178,255,0.8);
+    width: 80%;
+    height: 20%;
+    border: 5px solid #F4F4F5;
+    border-radius: 20px;
+    margin: auto;
+}

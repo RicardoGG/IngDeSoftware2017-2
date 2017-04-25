@@ -13,32 +13,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administrador</title>
-        <link rel="stylesheet" type="text/css" href="css/administrador.css">
+        <link rel="stylesheet" type="text/css" href="css/admin.css">
     </head>
 
-    <body>
-        <div class="box">
-            <p class="titles" <h1>Lista de Puestos:</h1> </p>
-        <div class="blur">
-        <div class="zoom">    <body class="bgcolor" style="display: table">
-
-                <form method="submit" action="/PrimerProyecto/ActualizarPuestoIH">
-                    <c:forEach var="puesto" items="${puestos}">
-                        ${puesto.idNombre}
-                        <%-- <button>Actualizar</button> Para asociar cada voton a un solo puesto--%>
-                        <br>
-                    </c:forEach>
-                </form>
-                
-                
+    
+    <body class="bgcolor">
+        <div class="header">
+            <p class="title_page">Home de Administración</p>
         </div>
-    </div>
-        </div> 
-              <form method ="POST" action="/PrimerProyecto/cerrarSesion">
-                <button> Cerrar Sesión</button>
-              </form>
-        
-        <br>
+        <div class="sidemenu">
+            <img class="logo" src="css/logo.png">
         <form method="POST" action="/PrimerProyecto/elimPuest">
             <button>Eliminar Puesto</button>
         </form>
@@ -54,6 +38,13 @@
         <form method="submit" action="/PrimerProyecto/modificarPuesto">
             <button>Modificar Puesto</button>
         </form>
+            
+        <form method ="POST" action="/PrimerProyecto/cerrarSesion">
+            <button> Cerrar Sesión</button>
+        </form>
+
+            
+        </div> 
         
 
 </body>
