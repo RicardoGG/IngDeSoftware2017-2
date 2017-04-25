@@ -18,3 +18,8 @@ and open the template in the editor.
   text-align: center;
   color: #BFCAC0;
 }
+
+.bgimage{
+    background-image: url("foto.jpg");
+
+}

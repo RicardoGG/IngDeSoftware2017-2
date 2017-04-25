@@ -9,18 +9,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/general_style.css">
+        <link rel="stylesheet" type="text/css" href="css/registro.css">
         <title>Registro</title>
     </head>
-    <body>
-        <h1>Registro</h1>
-        <form method="POST" action="/PrimerProyecto/formulario">
-            <form action="." oniput="range_control_value.value = range_control.valueAsNumber"/>
-            Nombre: <br> <input id="name" name="nombre" type="text" placeholder="Nombre"/><br>
-            Apellido Paterno: <br> <input id="paterno" name="paterno" type="text" placeholder="apPaterno"><br>
-            Apellido Materno: <br> <input id="materno" name="materno" type="text" placeholder="apMaterno"><br>
-            Email: <br> <input id="email" name="email" type="text" placeholder="Correo"/><br>
-            Contraseña <br> <input id="password" name="password" type="password" placeholder="Contrasena" /><br>
-            <button>Aceptar</button>
-        </form>
+    <body class="bgimage">
+        <div class="box">
+            <p class="register_title">Iniciar Sesion</p>
+            <form method="POST" action="/PrimerProyecto/formulario">
+                <form action="." oniput="range_control_value.value = range_control.valueAsNumber"/>
+                <p class="texts">Nombre:</p> <br><input class="register_input" id="name" name="nombre" type="text" placeholder="Nombre"/><br>
+                <p class="texts">Apellido Paterno: </p><br> <input id="paterno" class="register_input" name="paterno" type="text" placeholder="apPaterno"><br>
+                <p class="texts">Apellido Materno: </p><br> <input id="materno" class="register_input" name="materno" type="text" placeholder="apMaterno"><br>
+                <p class="texts">Email: </p><br> <input id="email" name="email" class="register_input" type="text" placeholder="Correo"/><br>
+                <p class="texts">Contraseña </p><br> <input id="password" class="register_input" name="password" type="password" placeholder="Contrasena" /><br>
+                <button class="register_button">Aceptar</button>
+            </form>    
+        </div>
+        
     </body>
 </html>

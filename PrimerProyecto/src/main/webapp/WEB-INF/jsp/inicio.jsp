@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="css/general_style.css">
     </head>
     <div class="blur">
-    <body class="bgcolor" style="display: table">
+    <body class="bgimage" style="display: table">
         <div class="box1">
         <form method="POST" action="/PrimerProyecto/login">
             <p class="login_title">Iniciar Sesion</p>
