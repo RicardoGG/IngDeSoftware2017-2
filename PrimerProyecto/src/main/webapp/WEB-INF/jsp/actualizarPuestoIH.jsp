@@ -12,17 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="POST" action="/PrimerProyecto/datosPuesto">
-            
-            <h2>Nombre:</h2> <br>
-            <textarea name="nombre"></textarea>
-            <br>
-            <h2>Ubicacion: </h2> <br>
-            <textarea name="ubicacion"></textarea>
+        <form method="POST" action="/PrimerProyecto/actualizar">
 
+            <h2>Nombre:  </h2>
+            <input id="nombre_puesto" name ="nombre" type="text" placeholder = ${nombre}><br>
+            <br>
+            <h2>Ubicacion:  </h2>
+            <input id="ubicacion_puesto" name ="ubicacion" type="text" placeholder = ${ubicacion} >
+
+            <button class="login_button">Modificar</button>
 
         </form>
-        
+
         <form method="POST" action="/PrimerProyecto/cancelar">
             <button class="login_button">Cancelar</button>
         </form>

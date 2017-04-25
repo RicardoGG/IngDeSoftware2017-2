@@ -54,6 +54,7 @@ public class PuestoDAO {
             tx = session.beginTransaction();
             
             session.update(p);
+            //session.update("ubicacion", p);
             tx.commit();
         }
         catch(Exception e){
@@ -76,6 +77,7 @@ public class PuestoDAO {
         
         try{
             tx = session.beginTransaction();
+            
             session.delete(puesto, p);
             
             tx.commit();
