@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -14,16 +16,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vender")
 public class Vender implements Serializable {
+    
     @Id
+    @JoinColumn(name = "id")
+    private int id;
+   
+    
     @ManyToOne
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     @JoinColumn(name = "idAlimento")
     private Alimentos alimentos;
     
-    @Id
+    
     @ManyToOne
     @JoinColumn(name = "idNombre")
     private Puesto puesto;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     public Alimentos getAlimentos() {
         return alimentos;

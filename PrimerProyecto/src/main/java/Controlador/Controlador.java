@@ -79,6 +79,50 @@ public class Controlador {
     }
     
     
+    /**
+     * Cambia de la vista al formulario de cracion de puestos. 
+     */
+    @RequestMapping(value="/crearPuesto", method = RequestMethod.GET)
+    public ModelAndView creaPuest(ModelMap model, HttpServletRequest request){
+        return new ModelAndView("crearPuesto",model);
+    }
+    
+    
+    /**
+     * Cambia de la vista a la lista de puestos en la base de datos.
+     */
+    @RequestMapping(value="/leerPuesto", method = RequestMethod.GET)
+    public ModelAndView leerPuesto(ModelMap model, HttpServletRequest request){
+        String wrong = "";
+        List<Puesto> puestos_registrados = puesto.list_puestos();
+        
+        if(puestos_registrados == null){
+            wrong = "Error al cargar la información.";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        }
+        
+        model.addAttribute("puestos", puestos_registrados);
+        
+        return new ModelAndView("LeerPuesto",model);
+    }
+    
+    /**
+     * Cambia de la vista al formulario de eliminacion de puestos.
+     */
+    @RequestMapping(value="/elimPuest", method = RequestMethod.POST)
+    public ModelAndView elimPuest(ModelMap model, HttpServletRequest request){
+        List<Puesto> puest = puesto.list_puestos();
+        String wrong = "";
+        if(puest == null){
+            wrong = "Error al cargar la información.";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        }
+        model.addAttribute("puestos",puest);
+        return new ModelAndView("eliminarPuesto",model);
+    }
+    
     
     /*
      * Iniciar Sesion
@@ -101,8 +145,18 @@ public class Controlador {
             return new ModelAndView("error",model);
         }else if(pas.equals(p.getContrasenia())){
 
-            if(usuario.es_Admin(email).equals("1"))
+            if(usuario.es_Admin(email).equals("1")){
+                List<Puesto> puestos_registrados = puesto.list_puestos();
+        
+                if(puestos_registrados == null){
+                    wrong = "Error al cargar la información.";
+                    model.addAttribute("mensaje",wrong);
+                    return new ModelAndView("error",model);
+                }
+        
+                model.addAttribute("puestos", puestos_registrados);
                 return new ModelAndView("AdministradorIH", model);
+            }
 
             String nombre = p.getNombre();
             String apellidoPat = p.getApPaterno();
@@ -189,4 +243,80 @@ public class Controlador {
     
     
     
+    /**
+     * Metodo para crear nuevos puestos
+     */
+    @RequestMapping(value="/formularioPuesto", method = RequestMethod.POST)
+    public ModelAndView creaPuesto(ModelMap model,HttpServletRequest request){
+        String nombre = request.getParameter("nombre");
+        String ubicacion = request.getParameter("ubicacion");
+        
+        Puesto puest = null;
+        String wrong = "";
+        
+        if(nombre.equals("")){
+            wrong = "El nombre del puesto no puede estar vacio favor de poner un nombre";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        } else if (ubicacion.equals("")){
+            wrong = "La ubicacion no puede estar vacia, favor de poner un nombre";
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
+        } else {
+            puest = puesto.verificaPuesto(nombre);
+            if(puest != null){
+                wrong = "El puesto ya existe";
+                model.addAttribute("mensaje", wrong);
+                return new ModelAndView("error",model);
+            }else{
+                puest = new Puesto(nombre,ubicacion,0);
+                puesto.insert(puest);
+            }
+        }
+        
+        return new ModelAndView("AdministradorIH",model);
+    }
+    
+    /**
+     * Metodo para eliminar un puesto de la base de datos (para el Administrador) 
+     */
+    @RequestMapping(value="/eliminarPuesto", method = RequestMethod.POST)
+    public ModelAndView eliminarPuesto(ModelMap model,HttpServletRequest request){
+        String nombre = request.getParameter("puesto");
+        
+        Puesto puest = puesto.verificaPuesto(nombre);
+        String wrong = "";
+        
+        if(puest == null){
+            wrong = "El puesto no esta en la base de datos, favor de verificar el nombre";
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error",model);
+        }else{
+            puesto.delete(nombre);
+        }
+        return new ModelAndView("AdministradorIH",model);
+        
+    }
+    
+    /**
+     * Regresa a la vista del administrador.
+     * @param model
+     * @param request
+     * @return la vista del administrador.
+     */
+    @RequestMapping(value="/cancelar", method = RequestMethod.POST)
+    public ModelAndView cancelar(ModelMap model, HttpServletRequest request){
+        return new ModelAndView("AdministradorIH", model);
+    }
+    
+    /**
+     * Regresa a la vista del administrador.
+     * @param model
+     * @param request
+     * @return la vista del puesto a modificar.
+     */
+    @RequestMapping(value="/modificarPuesto", method = RequestMethod.GET)
+    public ModelAndView modificarPuesto(ModelMap model, HttpServletRequest request){
+        return new ModelAndView("actualizarPuestoIH", model);
+    }
 }

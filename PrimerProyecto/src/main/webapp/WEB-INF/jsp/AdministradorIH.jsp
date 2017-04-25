@@ -18,21 +18,43 @@
 
     <body>
         <div class="box">
-            <p class="titles" <h1>Lista de Puestos:</h1> </p></div> 
-              <form method ="POST" action="/PrimerProyecto/cerrarSesion">
-                <button> Cerrar Sesión</button>
-              </form>
-    <div class="blur">
+            <p class="titles" <h1>Lista de Puestos:</h1> </p>
+        <div class="blur">
         <div class="zoom">    <body class="bgcolor" style="display: table">
 
                 <form method="submit" action="/PrimerProyecto/ActualizarPuestoIH">
-                    <c:forEach var="puesto" items="${p}">
-                        ${puesto.nombre}
-                        <button>Actualizar</button> 
+                    <c:forEach var="puesto" items="${puestos}">
+                        ${puesto.idNombre}
+                        <%-- <button>Actualizar</button> Para asociar cada voton a un solo puesto--%>
+                        <br>
                     </c:forEach>
                 </form>
+                
+                
         </div>
     </div>
+        </div> 
+              <form method ="POST" action="/PrimerProyecto/cerrarSesion">
+                <button> Cerrar Sesión</button>
+              </form>
+        
+        <br>
+        <form method="POST" action="/PrimerProyecto/elimPuest">
+            <button>Eliminar Puesto</button>
+        </form>
+  
+        <form method="submit" action="/PrimerProyecto/crearPuesto">
+            <button>Crear Puesto</button>
+        </form>
+        
+        <form method="submit" action="/PrimerProyecto/leerPuesto">
+            <button>Ver Puestos</button>
+        </form>
+        
+        <form method="submit" action="/PrimerProyecto/modificarPuesto">
+            <button>Modificar Puesto</button>
+        </form>
+        
 
 </body>
 </html>

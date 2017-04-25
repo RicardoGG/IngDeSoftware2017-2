@@ -67,15 +67,17 @@ public class PuestoDAO {
      * Elimina un puesto de la base de datos.
      * @param p El puesto a eliminar.
     */
-    public void delete(Puesto p){
+    public void delete(String puesto){
         Session session = sessionFactory.openSession();
         
         Transaction tx = null;
         
+        Puesto p = verificaPuesto(puesto);
+        
         try{
             tx = session.beginTransaction();
+            session.delete(puesto, p);
             
-            session.delete(p);
             tx.commit();
         }
         catch(Exception e){
@@ -114,4 +116,36 @@ public class PuestoDAO {
         
         return puestos;
     }
+    
+    
+    /**
+     * Metodo para verificar si un puesto ya esta
+     */
+    public Puesto verificaPuesto(String nombre){
+        Puesto puesto = null;
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        
+        try{
+            
+            tx = session.beginTransaction();
+            String hql = "from Puesto where idNombre = :nombrePuesto";
+            Query query = session.createQuery(hql);
+            query.setParameter("nombrePuesto", nombre);
+            puesto = (Puesto)query.uniqueResult();
+            tx.commit();
+            
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return puesto;
+    }
+    
+    
 }

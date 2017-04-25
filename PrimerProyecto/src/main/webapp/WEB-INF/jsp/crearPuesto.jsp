@@ -13,10 +13,9 @@
     </head>
     <body>
         <h1>Puesto Nuevo</h1>
-        <form method="submit" action="/PrimerProyecto/formulario?">
+        <form method="POST" action="/PrimerProyecto/formularioPuesto">
             <form action="." oniput="range_control_value.value = range_control.valueAsNumber"/>
             Nombre: <br> <input id="name" name="nombre" type="text" placeholder="Nombre"/><br>
-            Alimentos: <br> <input id="alimentos" name="alimentos" type="text" placeholder="Alimentos" /><br>
             Ubicacion: <br> <input id="ubicacion" name="ubicacion" type="text" placeholder="Ubicacion" /><br>
             <button>Aceptar</button>
         </form>
