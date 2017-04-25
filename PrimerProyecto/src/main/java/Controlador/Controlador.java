@@ -319,4 +319,63 @@ public class Controlador {
     public ModelAndView modificarPuesto(ModelMap model, HttpServletRequest request){
         return new ModelAndView("actualizarPuestoIH", model);
     }
+    
+    /**
+     * redirige a la calificacion de puesto
+     */
+    @RequestMapping(value="/calificacionPuesto", method = RequestMethod.POST)
+    public ModelAndView calificarPuestoP(ModelMap model,HttpServletRequest request){
+        return new ModelAndView("calificarPuesto",model);
+    }
+    
+    /*
+    Calificacion del puesto
+    */
+     @RequestMapping(value="/calificarPuesto", method = RequestMethod.POST)
+    public ModelAndView calificarPuesto(ModelMap model,HttpServletRequest request){
+        String nombre = request.getParameter("nombre");
+        String ubicacion = request.getParameter("ubicacion");
+        String calificacion = request.getParameter("calificacion");
+        
+        Puesto puest;
+            String wrong = "";
+        
+        if(nombre.equals("")){
+            wrong = "El nombre del puesto no puede estar vacio favor de poner un nombre";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        } else if (ubicacion.equals("")){
+            wrong = "La ubicacion no puede estar vacia, favor de poner un número";
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error", model);
+        } else{
+            int c = Integer.parseInt(calificacion);
+            puest = new Puesto(nombre,ubicacion,c);
+            puesto.update(puest);
+        }
+                   
+        return new ModelAndView("verInformacionPuestoRegistrados",model);
+    }
+    /**
+     * Funcion que regresa la informacion de los puestos con un usuario registrado
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value="/verInfoRegistrado", method = RequestMethod.POST)
+    public ModelAndView verInformacionPuestoUsReg(ModelMap model,HttpServletRequest request){
+        
+        String wrong = "";
+        List<Puesto> puestos_registrados = puesto.list_puestos();
+        
+        if(puestos_registrados == null){
+            wrong = "Error al cargar la información.";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        }
+        
+        model.addAttribute("puestos", puestos_registrados);
+        
+        return new ModelAndView("verInformacionPuestoRegistrados",model);
+    }
+    
 }

@@ -22,14 +22,15 @@
     </head>
     <body>
         <h1>Puestos:</h1>
-
+        <form method ="POST" action="/PrimerProyecto/calificacionPuesto">
+            <button>Calificar Puesto</button>
+        </form>
         <form action="." oninput="range_control_value.value = range_control.valueAsNumber">
             <h2>
                 <c:forEach var="puesto" items="${puestos}">
                     <B>Nombre: </B>${puesto.idNombre}<br>
-                        <%--${puesto.horario}<br>
-                        ${puesto.alimentos}<br>--%>
                     <B>Ubicacion: </B>${puesto.ubicacion}<br>
+                    <B>Calificacion:</B>${puesto.calificacion}<br>
                     <br>
                 </c:forEach>
             </h2>
