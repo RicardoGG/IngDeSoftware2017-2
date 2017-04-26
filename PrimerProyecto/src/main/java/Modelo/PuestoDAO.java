@@ -68,17 +68,15 @@ public class PuestoDAO {
      * Elimina un puesto de la base de datos.
      * @param p El puesto a eliminar.
     */
-    public void delete(String puesto){
+    public void delete(Puesto p){
         Session session = sessionFactory.openSession();
         
         Transaction tx = null;
         
-        Puesto p = verificaPuesto(puesto);
-        
         try{
             tx = session.beginTransaction();
             
-            session.delete(puesto, p);
+            session.delete(p);
             
             tx.commit();
         }

@@ -1,6 +1,8 @@
 package Modelo;
 
 import Mapeo.Vender;
+import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -82,4 +84,34 @@ public class VenderDAO {
         }
         finally { session.close(); }
     }
+    
+    
+    public List<Vender> buscar(String nombre){
+        List<Vender> vender = null;
+        
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        
+        try{
+            
+            tx = session.beginTransaction();
+            String hql = "from Vender v where v.puesto.idNombre = :nombrePam";
+            Query query = session.createQuery(hql);
+            query.setParameter("nombrePam", nombre);
+            vender = (List<Vender>)query.list();
+            tx.commit();
+            
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+        return vender;
+    }
+    
+    
 }

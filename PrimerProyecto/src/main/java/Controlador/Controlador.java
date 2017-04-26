@@ -3,9 +3,11 @@ package Controlador;
 import Mapeo.Persona;
 import Mapeo.Puesto;
 import Mapeo.Usuario;
+import Mapeo.Vender;
 import Modelo.PersonaDAO;
 import Modelo.PuestoDAO;
 import Modelo.UsuarioDAO;
+import Modelo.VenderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,6 +39,9 @@ public class Controlador {
 
     @Autowired
     PuestoDAO puesto;
+    
+    @Autowired
+    VenderDAO vender;
 
     String edit_puesto;
 
@@ -280,6 +285,7 @@ public class Controlador {
         String nombre = request.getParameter("puesto");
 
         Puesto puest = puesto.verificaPuesto(nombre);
+        List<Vender> v = vender.buscar(nombre);
         String wrong = "";
 
         if (puest == null) {
@@ -287,7 +293,13 @@ public class Controlador {
             model.addAttribute("mensaje", wrong);
             return new ModelAndView("error", model);
         } else {
-            puesto.delete(nombre);
+            if(v.isEmpty()){
+                puesto.delete(puest);
+            }else{
+                for(Vender ven: v)
+                    vender.delete(ven);
+                puesto.delete(puest);
+            }
         }
         return new ModelAndView("AdministradorIH", model);
 
@@ -318,6 +330,14 @@ public class Controlador {
         model.addAttribute("puestos", puest);
         return new ModelAndView("modificarPuestoIH", model);
     }
+    
+    /**
+     * redirige a la calificacion de puesto
+     */
+    @RequestMapping(value="/calificacionPuesto", method = RequestMethod.POST)
+    public ModelAndView calificarPuestoP(ModelMap model,HttpServletRequest request){
+        return new ModelAndView("calificarPuesto",model);
+    }
 
     /**
      * Va a la vista con los datos del puesto.
@@ -346,6 +366,67 @@ public class Controlador {
         model.addAttribute("calificacion", calificacion);
 
         return new ModelAndView("actualizarPuestoIH", model);
+    }
+    
+    
+    /*
+    Calificacion del puesto
+    */
+     @RequestMapping(value="/calificarPuesto2", method = RequestMethod.POST)
+    public ModelAndView calificarPuesto(ModelMap model,HttpServletRequest request){
+        String nombre = request.getParameter("nombre");
+        String calificacion = request.getParameter("calificacion");
+        
+        String wrong = "";
+        List<Puesto> puestos_registrados = puesto.list_puestos();
+        
+        if(puestos_registrados == null){
+            wrong = "Error al cargar la información.";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        }
+        
+        model.addAttribute("puestos", puestos_registrados);
+        
+        Puesto puest;
+        
+        if(nombre.equals("")){
+            wrong = "El nombre del puesto no puede estar vacio favor de poner un nombre";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        } else{
+            int c = Integer.parseInt(calificacion);
+            puest = puesto.verificaPuesto(nombre);
+            int n = puest.getCalificacion();
+            int califFinal = (c+n)/2;
+            puest.setCalificacion(califFinal);
+            puesto.update(puest);
+        }
+                   
+        return new ModelAndView("perfil",model);
+    }
+    
+    
+    /**
+     * Funcion que regresa la informacion de los puestos con un usuario registrado
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value="/verInfoRegistrado", method = RequestMethod.POST)
+    public ModelAndView verInformacionPuestoUsReg(ModelMap model,HttpServletRequest request){
+        
+        String wrong = "";
+        List<Puesto> puestos_registrados = puesto.list_puestos();
+        
+        if(puestos_registrados == null){
+            wrong = "Error al cargar la información.";
+            model.addAttribute("mensaje",wrong);
+            return new ModelAndView("error",model);
+        }
+        
+        model.addAttribute("puestos", puestos_registrados);
+        
+        return new ModelAndView("verInformacionPuestoRegistrados",model);
     }
 
     /**

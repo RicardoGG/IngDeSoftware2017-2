@@ -24,13 +24,25 @@ public class Vender implements Serializable {
     
     @ManyToOne
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-    @JoinColumn(name = "idAlimento")
+    @JoinColumn(name = "idAlimento_fk")
     private Alimentos alimentos;
     
     
     @ManyToOne
-    @JoinColumn(name = "idNombre")
+    @JoinColumn(name = "idNombre_fk")
     private Puesto puesto;
+    
+    
+    public Vender(){
+        
+    }
+    
+    public Vender(int id, Alimentos alimentos, Puesto puesto){
+        this.id = id;
+        this.alimentos = alimentos;
+        this.puesto = puesto;
+    }
+    
 
     public int getId() {
         return id;
