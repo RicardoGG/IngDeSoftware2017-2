@@ -10,13 +10,47 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/admin.css">
         <title>Leer Puesto</title>
     </head>
-    <body>
-        <h1>A continuacion se muestra la lista de puestos que hay:</h1>
-        <c:forEach var="puesto" items="${puestos}">
-            ${puesto.idNombre}<br>
-        </form>
-        </c:forEach>
+    <body class="bgimage">
+        <div class="header">
+            <p class="title_page">Leer puestos</p>
+        </div>
+        <div style="height: 90%;width: 100%; position: relative">
+        <div class="sidemenu">
+                <img class="logo" src="css/logo.png">
+
+                <form method="submit" action="/PrimerProyecto/crearPuesto">
+                    <button>Crear Puesto</button>
+                </form>
+
+                <form method="submit" action="/PrimerProyecto/leerPuesto">
+                    <button>Ver Puestos</button>
+                </form>
+
+                <form method="submit" action="/PrimerProyecto/modificarPuesto">
+                    <button>Modificar Puesto</button>
+                </form>
+                
+                <form method="POST" action="/PrimerProyecto/elimPuest">
+                    <button>Eliminar Puesto</button>
+                </form>
+
+                <form method ="POST" action="/PrimerProyecto/cerrarSesion">
+                    <button> Cerrar Sesión</button>
+                </form>
+        </div>     
+        <div class="content">
+            <div class="titles">
+                <p>A continuacion se muestra la lista de puestos que hay:</p>
+                <c:forEach var="puesto" items="${puestos}">
+                    ${puesto.idNombre}<br>
+                </form>
+                </c:forEach>
+            </div>
+        </div>
+        </div>
+        
     </body>
 </html>

@@ -17,16 +17,13 @@
     </head>
 
     
-    <body class="bgcolor">
+    <body class="bgimage">
         <div class="header">
             <p class="title_page">Home de Administración</p>
         </div>
         <div style="height: 90%;width: 100%; position: relative">
         <div class="sidemenu">
                 <img class="logo" src="css/logo.png">
-                <form method="POST" action="/PrimerProyecto/elimPuest">
-                    <button>Eliminar Puesto</button>
-                </form>
 
                 <form method="submit" action="/PrimerProyecto/crearPuesto">
                     <button>Crear Puesto</button>
@@ -38,6 +35,10 @@
 
                 <form method="submit" action="/PrimerProyecto/modificarPuesto">
                     <button>Modificar Puesto</button>
+                </form>
+                
+                <form method="POST" action="/PrimerProyecto/elimPuest">
+                    <button>Eliminar Puesto</button>
                 </form>
 
                 <form method ="POST" action="/PrimerProyecto/cerrarSesion">

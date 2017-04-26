@@ -8,10 +8,10 @@ and open the template in the editor.
     Author     : servando
 */
 
-.bgcolor{
+
+.bgimage{
     background-image: url("prometeo.jpg");
     background-size: cover;
-    
 }
 
 .header{
@@ -93,6 +93,7 @@ button{
     margin: 0;
     font-size: 30pt;
 }
+
 .content{
     position: relative;
     top: 0;
