@@ -58,7 +58,8 @@
                     <p class="title_page">Nombre de puesto a eliminar</p>
                     <input class="login_input1" id="nombre2" name ="puesto" type="text" placeholder="Nombre Puesto"><br>
                     <button class="login_button" style="color: white">Aceptar</button>
-                </form>        </div>
+                </form> 
+        </div>
         </div>
         
         
