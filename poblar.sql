@@ -40,7 +40,7 @@ INSERT INTO alimentos VALUES (4,"Hamburguesas");
 INSERT INTO alimentos VALUES (5,"Ensalada");
 
 
-INSERT INTO vender VALUES ("Sucio Larry",0);
-INSERT INTO vender VALUES ("Quesadillas",0);
-INSERT INTO vender VALUES ("Rico y Saludable",5);
-INSERT INTO vender VALUES ("No 1",3);
+INSERT INTO vender (idNombre_fk,idAlimento_fk) VALUES ("Sucio Larry",0);
+INSERT INTO vender (idNombre_fk,idAlimento_fk) VALUES ("Quesadillas",0);
+INSERT INTO vender (idNombre_fk,idAlimento_fk) VALUES ("Rico y Saludable",5);
+INSERT INTO vender (idNombre_fk,idAlimento_fk) VALUES ("No 1",3);

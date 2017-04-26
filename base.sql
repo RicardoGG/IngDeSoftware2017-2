@@ -8,15 +8,16 @@ CREATE TABLE persona(
 	Contrasena varchar(50),
 	Correo varchar(50) NOT NULL, 
 	PRIMARY KEY (Correo)
-);
+)ENGINE=InnoDB;
 
 
 CREATE TABLE usuario(
 	Correo_us varchar(50) NOT NULL,
 	administrador varchar(1),
 	PRIMARY KEY (Correo_us),
-	FOREIGN KEY (Correo_us) REFERENCES persona (Correo) ON DELETE CASCADE
-);
+	CONSTRAINT usuario_fk_1 FOREIGN KEY (Correo_us) REFERENCES persona (Correo)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
 
 
 CREATE TABLE puesto(
@@ -24,31 +25,34 @@ CREATE TABLE puesto(
 	Ubicacion varchar(100),
 	Calificacion int,
 	PRIMARY KEY (idNombre)
-);
+)ENGINE=InnoDB;
 
 CREATE TABLE calificar(
 	Correo_fk varchar(50) NOT NULL,
 	idNombre_fk varchar(50) NOT NULL,
 	Comentario varchar(300),
 	PRIMARY KEY (Correo_fk,idNombre_fk),
-	FOREIGN KEY (Correo_fk) REFERENCES persona (Correo),
-	FOREIGN KEY (idNombre_fk) REFERENCES puesto (idNombre)
-);
+	CONSTRAINT calificar_fk_2 FOREIGN KEY (Correo_fk) REFERENCES persona (Correo),
+	CONSTRAINT calificar_fk_1 FOREIGN KEY (idNombre_fk) REFERENCES puesto (idNombre)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
 
 
 CREATE TABLE alimentos(
 	idAlimento int,
 	nombreAlim varchar(100),
 	PRIMARY KEY (idAlimento)
-);
+)ENGINE=InnoDB;
 
 CREATE TABLE vender(
+	id int(100) NOT NULL AUTO_INCREMENT,
 	idNombre_fk varchar(50) NOT NULL,
 	idAlimento_fk int NOT NULL,
-	PRIMARY KEY(idNombre_fk, idAlimento_fk),
-	FOREIGN KEY (idNombre_fk) REFERENCES puesto (idNombre),
-	FOREIGN KEY (idAlimento_fk) REFERENCES alimentos (idAlimento)
-);
+	PRIMARY KEY(id),
+	CONSTRAINT vender_fk_1 FOREIGN KEY (idNombre_fk) REFERENCES puesto (idNombre),
+	CONSTRAINT vender_fk_2 FOREIGN KEY (idAlimento_fk) REFERENCES alimentos (idAlimento)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
 
 
-ALTER TABLE usuario ADD CHECK (Correo_us like '%@ciencias.unam.mx');
+
