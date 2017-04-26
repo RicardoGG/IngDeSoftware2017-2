@@ -21,30 +21,35 @@
         <div class="header">
             <p class="title_page">Home de Administración</p>
         </div>
+        <div style="height: 90%;width: 100%; position: relative">
         <div class="sidemenu">
-            <img class="logo" src="css/logo.png">
-        <form method="POST" action="/PrimerProyecto/elimPuest">
-            <button>Eliminar Puesto</button>
-        </form>
-  
-        <form method="submit" action="/PrimerProyecto/crearPuesto">
-            <button>Crear Puesto</button>
-        </form>
-        
-        <form method="submit" action="/PrimerProyecto/leerPuesto">
-            <button>Ver Puestos</button>
-        </form>
-        
-        <form method="submit" action="/PrimerProyecto/modificarPuesto">
-            <button>Modificar Puesto</button>
-        </form>
-            
-        <form method ="POST" action="/PrimerProyecto/cerrarSesion">
-            <button> Cerrar Sesión</button>
-        </form>
+                <img class="logo" src="css/logo.png">
+                <form method="POST" action="/PrimerProyecto/elimPuest">
+                    <button>Eliminar Puesto</button>
+                </form>
 
-            
-        </div> 
+                <form method="submit" action="/PrimerProyecto/crearPuesto">
+                    <button>Crear Puesto</button>
+                </form>
+
+                <form method="submit" action="/PrimerProyecto/leerPuesto">
+                    <button>Ver Puestos</button>
+                </form>
+
+                <form method="submit" action="/PrimerProyecto/modificarPuesto">
+                    <button>Modificar Puesto</button>
+                </form>
+
+                <form method ="POST" action="/PrimerProyecto/cerrarSesion">
+                    <button> Cerrar Sesión</button>
+                </form>
+        </div>     
+        <div class="content">
+            <p class="welcome">¡Bienvenido!</p>
+        </div>
+        </div>
+        
+        
         
 
 </body>

@@ -10,7 +10,7 @@ and open the template in the editor.
 
 .bgcolor{
     background-image: url("prometeo.jpg");
-    background-size: 100%;
+    background-size: cover;
     
 }
 
@@ -42,7 +42,7 @@ body,html{
    font-size: 15pt;
    font-weight: bold;
    font-family: verdana;
-   
+
    padding: 0;
    margin: 0;
    padding-top:10px;
@@ -65,7 +65,7 @@ button{
     padding-left: 4%;
     color: #31364C;
     font-weight: bold;
-    padding-bottom: 15%; 
+    padding-bottom: 10%; 
 }
 
 .logo{
@@ -78,21 +78,31 @@ button{
 }
 .sidemenu{
     width: 25%;
-    relative:0;
+    position:absolute;
     background-color: #BFCAC0;
-    height: 90%;
+    height: 100%;
+    margin: 0;
 }
 
-.box{
-    
+.welcome{
+    color:#F4F4F5;
+    position: relative;
+    font-weight: bold;
+    top: 48%;
+    left: 45%;
+    margin: 0;
+    font-size: 30pt;
+}
+.content{
+    position: relative;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(102,178,255,0.8);
-    width: 80%;
-    height: 20%;
+    background-color: rgba(0,0,0,0.8);
+    width: 74%;
+    height: 98%;
+    left: 25%;
     border: 5px solid #F4F4F5;
     border-radius: 20px;
-    margin: auto;
 }
