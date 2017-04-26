@@ -1,9 +1,11 @@
 package Controlador;
 
+import Mapeo.Calificar;
 import Mapeo.Persona;
 import Mapeo.Puesto;
 import Mapeo.Usuario;
 import Mapeo.Vender;
+import Modelo.CalificarDAO;
 import Modelo.PersonaDAO;
 import Modelo.PuestoDAO;
 import Modelo.UsuarioDAO;
@@ -42,6 +44,9 @@ public class Controlador {
     
     @Autowired
     VenderDAO vender;
+    
+    @Autowired
+    CalificarDAO calificar;
 
     String edit_puesto;
 
@@ -438,27 +443,28 @@ public class Controlador {
      */
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
     public ModelAndView actualizar(ModelMap model, HttpServletRequest request) {
+        String nombreViejo = request.getParameter("nombreViejo");
         String nombre = request.getParameter("nombre");
         String ubicacion = request.getParameter("ubicacion");
 
-        Puesto p = puesto.verificaPuesto(nombre);
-
-        if (p == null) {
-            if (ubicacion.equals(""))  
-               p = new Puesto(nombre);
-            else
-                p = new Puesto(nombre, ubicacion, 0);
-
-            puesto.insert(p);
-            return new ModelAndView("AdministradorIH", model);
+        Puesto p = puesto.verificaPuesto(nombreViejo);
+        Calificar c = calificar.buscar(nombre);
+        List<Vender> v = vender.buscar(nombreViejo);
+        String wrong = "";
+        if(p == null){
+            wrong = "El puesto no se encuentra en la base de datos, favor de verificar el nombre";
+            model.addAttribute("mensaje", wrong);
+            return new ModelAndView("error",model);
+        }else{
+            if(nombre.equals("") != true){
+                puesto.update(p);
+            }
+            if(ubicacion.equals("") != true)
+                p.setUbicacion(ubicacion);
+            puesto.update(p);
         }
-
-        if (ubicacion.equals(""))
-                ubicacion = p.getUbicacion();
-
-        p.setUbicacion(ubicacion);
-        puesto.update(p);
-
+        
+        
         return new ModelAndView("AdministradorIH", model);
     }
 }

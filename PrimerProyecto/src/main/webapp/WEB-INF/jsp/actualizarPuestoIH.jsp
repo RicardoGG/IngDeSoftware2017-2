@@ -13,10 +13,10 @@
     </head>
     <body>
         <form method="POST" action="/PrimerProyecto/actualizar">
-
-            <h2>Nombre:  </h2>
+            <input type="hidden" name="nombreViejo" value="${nombre}">
+           <!-- <h2>Nombre nuevo:  </h2>
             <input id="nombre_puesto" name ="nombre" type="text" placeholder = ${nombre}><br>
-            <br>
+            <br>-->
             <h2>Ubicacion:  </h2>
             <input id="ubicacion_puesto" name ="ubicacion" type="text" placeholder = ${ubicacion} >
 

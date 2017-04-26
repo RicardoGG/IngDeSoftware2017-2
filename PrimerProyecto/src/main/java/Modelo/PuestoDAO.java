@@ -52,9 +52,7 @@ public class PuestoDAO {
         
         try{
             tx = session.beginTransaction();
-            
             session.update(p);
-            //session.update("ubicacion", p);
             tx.commit();
         }
         catch(Exception e){

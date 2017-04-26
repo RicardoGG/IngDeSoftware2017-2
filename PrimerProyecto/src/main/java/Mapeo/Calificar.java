@@ -20,16 +20,27 @@ public class Calificar implements Serializable {
     @Id
     @ManyToOne
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
-    @JoinColumn(name = "Correo")
+    @JoinColumn(name = "Correo_fk")
     private Persona persona;
     
     @Id
     @ManyToOne
-    @JoinColumn(name = "idNombre")
+    @JoinColumn(name = "idNombre_fk")
     private Puesto puesto;
     
     @Column(name = "Comentario")
     private String comentario;
+    
+    public Calificar(){
+        
+    }
+    
+    public Calificar(Persona persona, Puesto puesto, String comentario){
+        this.persona = persona;
+        this.puesto = puesto;
+        this.comentario = comentario;
+    }
+    
 
     public Persona getPersona() {
         return persona;
