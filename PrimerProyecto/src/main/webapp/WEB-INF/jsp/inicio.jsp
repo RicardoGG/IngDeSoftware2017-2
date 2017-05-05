@@ -18,6 +18,7 @@
         <div class="box1">
         <form method="POST" action="/PrimerProyecto/login">
             <p class="login_title">Iniciar Sesion</p>
+            <img class="logo" src="css/logoBlanco.png">
             <input class="login_input1" id="nombre2" name ="correo" type="text" placeholder="Correo"><br>
             <input class="login_input2" id="nombre2" name ="password" type="password" placeholder="Contrasena"><br>
             <button class="login_button">Entrar</button>
